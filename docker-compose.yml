@@ -16,11 +16,12 @@ services:
     image: nginx:latest
     container_name: gateway
     hostname: gateway
-
+    restart: always
     ports:
       - 80:80
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/html:/etc/nginx/html
     networks:
       - hoppscotch
     depends_on:
