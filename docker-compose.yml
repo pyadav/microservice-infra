@@ -1,3 +1,16 @@
+x-service-common:
+  &service-common
+  environment:
+    - POSTGRES_HOST=postgres
+    - POSTGRES_USERNAME=hoppscotch
+    - POSTGRES_PASSWORD=hoppscotch
+    - POSTGRES_DATABASE=hoppscotch
+  depends_on:
+    - postgres
+  networks:
+    - hoppscotch
+
+
 services:
   postgres:
     image: postgres:16-alpine
@@ -14,52 +27,28 @@ services:
       - hoppscotch
 
   users-service:
+    <<: *service-common
     build:
       context: users
       dockerfile: Dockerfile
     ports:
       - 3000:3000
-    environment:
-      - POSTGRES_HOST=postgres
-      - POSTGRES_USERNAME=hoppscotch
-      - POSTGRES_PASSWORD=hoppscotch
-      - POSTGRES_DATABASE=hoppscotch
-    depends_on:
-        - postgres
-    networks:
-        - hoppscotch
 
   orders-service:
+    <<: *service-common
     build:
       context: orders
       dockerfile: Dockerfile
     ports:
       - 3100:3100
-    environment:
-      - POSTGRES_HOST=postgres
-      - POSTGRES_USERNAME=hoppscotch
-      - POSTGRES_PASSWORD=hoppscotch
-      - POSTGRES_DATABASE=hoppscotch
-    depends_on:
-        - postgres
-    networks:
-        - hoppscotch
 
   products-service:
+    <<: *service-common
     build:
       context: products
       dockerfile: Dockerfile
     ports:
       - 3200:3200
-    environment:
-      - POSTGRES_HOST=postgres
-      - POSTGRES_USERNAME=hoppscotch
-      - POSTGRES_PASSWORD=hoppscotch
-      - POSTGRES_DATABASE=hoppscotch
-    depends_on:
-        - postgres
-    networks:
-        - hoppscotch
 
 
 networks:
