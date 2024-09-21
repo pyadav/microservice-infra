@@ -10,3 +10,26 @@ services:
       - POSTGRES_USER=hoppscotch
       - POSTGRES_PASSWORD=hoppscotch
       - POSTGRES_DB=hoppscotch
+    networks:
+      - hoppscotch
+
+  users-service:
+    build:
+      context: user
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USERNAME=hoppscotch
+      - POSTGRES_PASSWORD=hoppscotch
+      - POSTGRES_DATABASE=hoppscotch
+    depends_on:
+        - postgres
+    networks:
+        - hoppscotch
+
+
+networks:
+  hoppscotch:
+    driver: bridge
