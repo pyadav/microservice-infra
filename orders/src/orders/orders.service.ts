@@ -13,7 +13,6 @@ export class OrdersService {
 
   create(createOrderDto: CreateOrderDto): Promise<Orders> {
     const orders = new Orders();
-    orders.orderID = 'fnknkvvdv';
     orders.isCancelled = createOrderDto.isCancelled;
 
     return this.ordersRepository.save(orders);
