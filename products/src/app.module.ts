@@ -5,12 +5,12 @@ import { ProductsModule } from './products/products.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: "postgres",
-      host: process.env.HOST,
+      type: 'postgres',
+      host: process.env.POSTGRES_HOST,
       port: 5432,
-      username: process.env.USERNAME,
-      password: process.env.PASSWORD,
-      database: process.env.DATABASE,
+      username: process.env.POSTGRES_USERNAME,
+      password: process.env.POSTGRES_PASSWORD,
+      database: process.env.POSTGRES_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
     }),
